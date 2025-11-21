@@ -1,4 +1,5 @@
 package controller;
+import java.util.ArrayList;
 import java.util.HashMap;
 import model.StudentModel;
 
@@ -16,5 +17,24 @@ public class StudentController {
 			status = true;
 		}
 		return status;
+	}
+	
+	public HashMap<Integer, HashMap<String, String>> showAllStudent(){
+		HashMap<Integer, HashMap<String, String>> all_data = new HashMap<>();
+		StudentModel sm = new StudentModel();
+		ArrayList<StudentModel> db_data = sm.selectStudentList();
+		int counter = 0;
+		for (StudentModel studentModel : db_data) {
+			HashMap<String, String> students = new HashMap<>();
+			students.put("first_name", studentModel.getFirstName());
+			students.put("last_name", studentModel.getLastName());
+			students.put("email", studentModel.getEmail());
+			students.put("address", studentModel.getAddress());
+			students.put("gender", studentModel.getGender());
+			students.put("registration_no", studentModel.getRegistrationNo() + "");
+			all_data.put(counter, students);
+			counter++;
+		}
+		return all_data;
 	}
 }

@@ -2,6 +2,8 @@ package model;
 
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -72,16 +74,26 @@ public class StudentModel {
 		return status;
 	}
 	
-	public ResultSet selectStudentList() {
-		ResultSet result = null;
+	public ArrayList<StudentModel> selectStudentList() {
+		ArrayList<StudentModel> data = new ArrayList<StudentModel>();
 		try {
 			this.createConnection();
 			Statement stmt = this.connect.createStatement();
 			String query = "SELECT * FROM student";
-			result = stmt.executeQuery(query);
+			ResultSet result = stmt.executeQuery(query);
+			while(result.next()) {
+				StudentModel sm = new StudentModel();
+				sm.setFirstName(result.getString("first_name"));
+				sm.setLastName(result.getString("last_name"));
+				sm.setEmail(result.getString("email"));
+				sm.setAddress(result.getString("address"));
+				sm.setGender(result.getString("gender"));
+				sm.setRegistrationNo(result.getInt("registration_no"));
+				data.add(sm);
+			}
 		} catch (Exception e) {
 			System.out.println("Something went wrong!!");
 		}
-		return result;
+		return data;
 	}
 }
