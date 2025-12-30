@@ -51,7 +51,7 @@ public class ContactServlet extends HttpServlet {
 		request.setAttribute("contact", contact);
 		request.setAttribute("email", email);
 		request.setAttribute("remarks", remarks);
-		doGet(request, response);
+		request.getRequestDispatcher("form_result.jsp").forward(request, response);
 	}
 
 }
