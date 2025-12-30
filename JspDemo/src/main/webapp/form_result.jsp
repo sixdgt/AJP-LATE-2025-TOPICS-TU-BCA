@@ -10,7 +10,8 @@
 <body>
 	<section class="container">
 		<div class="card mt-5 p-5 mb-2">
-			<h1>Displaying data from form request!!</h1>
+			<h1 class="alert alert-secondary">Displaying data from form request!!</h1>
+			<a href="Contact" class="btn btn-info btn-sm">Submit Again</a>
 		</div>
 		<div class="card p-5">
 			<div class="card-header">
